@@ -1,6 +1,8 @@
 class Game {
   constructor() {
     // define the empty array for the coins here
+    this.obstacles = [];
+
   }
   preloadGame() {
     console.log("this is the game preload");
@@ -13,6 +15,7 @@ class Game {
     ];
     // player preloaden
     this.playerImage = loadImage("../assets/player/bb8.gif");
+    this.coinImage = loadImage("../assets/coins/tile000.png");
   }
   setupGame() {
     console.log("this is the game setup");
@@ -25,10 +28,20 @@ class Game {
   }
 
   drawGame() {
-    console.log("this is the game draw");
+    // console.log("this is the game draw");
     this.background.drawBackground();
     this.player.drawPlayer();
+    if (frameCount % 180 === 0) {
+      console.log("this will be the push event");
+      this.obstacles.push(new Obstacle(this.coinImage));
+      console.log(this.obstacles);
+    }
+
+    this.obstacles.forEach(function (obstacle) {
+      obstacle.drawObstacle();
+    });
     //  call the draw functions for the player + the background
+
     // define the obstacle drawing logic + add a new obstacle to  the array in the constructor with the image passed into it
   }
 }
